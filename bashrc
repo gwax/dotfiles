@@ -17,6 +17,11 @@ if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
     source $(brew --prefix)/etc/bash_completion
 fi
 
+# If boot2docker is installed and up, do shellinit
+if [[ -f /usr/local/bin/boot2docker ]] && [ "$(boot2docker status)" = running]; then
+    eval "$(boot2docker shellinit 2> /dev/null)"
+fi
+
 # Enable ruby shims and autocompletion
 export RBENV_ROOT="$HOME/.rbenv"
 if which rbenv > /dev/null; then
