@@ -90,6 +90,10 @@ HISTFILESIZE=
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
+# Application color support (mostly ls)
+export CLICOLOR=1
+ls --color=auto &> /dev/null && alias ls='ls --color=auto'
+
 # Add local binaries
 if [[ -d ~/bin ]] ; then
     export PATH=~/bin:$PATH
