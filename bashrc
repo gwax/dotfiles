@@ -13,9 +13,14 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Enable bash completions
-if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-    source $(brew --prefix)/etc/bash_completion
+if which brew > /dev/null 2>&1; then
+    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
+        source $(brew --prefix)/etc/bash_completion
+    fi
+elif [[ -f /etc/profile.d/bash-completion ]]; then
+    source /etc/profile.d/bash-completion
 fi
+
 
 # If boot2docker is installed and up, do shellinit
 if [[ -f /usr/local/bin/boot2docker ]] && [ "$(boot2docker status)" = running ]; then
@@ -24,7 +29,7 @@ fi
 
 # Enable ruby shims and autocompletion
 export RBENV_ROOT="$HOME/.rbenv"
-if which rbenv > /dev/null; then
+if which rbenv > /dev/null 2>&1; then
     eval "$(rbenv init -)"
 fi
 
@@ -32,7 +37,7 @@ fi
 case ${TERM} in
     xterm*|rxvt*|Eterm|aterm|kterm|gnome)
         PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
-	;;
+        ;;
     screen)
         PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
         ;;
@@ -46,6 +51,9 @@ else
 fi
 
 # git PS1 options
+if [[ -f /usr/share/git/git-prompt.sh ]]; then
+    source /usr/share/git/git-prompt.sh
+fi
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -59,7 +67,7 @@ if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
     PS1_ISTART='\[\e[38;05;52m\]['
     PS1_TIME='\[\e[38;05;240m\]\t'
-    PS1_COMPANY='\[\e[38;05;106m\]CloverHealth'
+    PS1_COMPANY='\[\e[38;05;106m\]gwax'
     PS1_IEND='\[\e[38;05;52m\]]'
     PS1_BLOCK_HEADER="$PS1_ISTART$PS1_TIME $PS1_COMPANY$PS1_IEND"
     PS1_USER='\[\e[38;05;118m\]\u'
