@@ -93,10 +93,12 @@ PS1="\n$PS1_BLOCK_HEADER $PS1_BLOCK_USER\n$PS1_BLOCK_PWD\n$PS1_SEP$PS1_END"
 unset color_prompt
 
 # Forever history
+HISTIGNORE="&:ls:exit:history"
 HISTSIZE=
 HISTFILESIZE=
 shopt -s histappend
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+shopt -s cmdhist
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Application color support (mostly ls)
 export CLICOLOR=1
