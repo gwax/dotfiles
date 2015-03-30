@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.32 for waksman on Sun Mar  1 18:33:34 2015.
+# Written by xscreensaver-demo 5.32 for waksman on Sun Mar 29 20:56:02 2015.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
@@ -278,7 +278,7 @@ programs:								      \
 -				tessellimage -root			    \n\
 - GL: 				winduprobot -root			    \n\
 				binaryring -root			    \n\
-  GL: 				cityflow -root				    \n\
+- GL: 				cityflow -root				    \n\
 - GL: 				geodesicgears -root			    \n\
 
 
