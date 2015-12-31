@@ -133,3 +133,6 @@ fi
 if [[ -f ~/.bash_secrets ]] ; then
     source ~/.bash_secrets
 fi
+
+# Setup airflow environment
+export AIRFLOW_HOME=~/airflow
