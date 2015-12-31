@@ -71,11 +71,12 @@ if [ "$color_prompt" = yes ]; then
 fi
 
 # Setup colored prompt
+ORG="gwax"
 if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
     PS1_ISTART='\[\e[38;05;52m\]['
     PS1_TIME='\[\e[38;05;240m\]\t'
-    PS1_COMPANY='\[\e[38;05;106m\]gwax'
+    PS1_COMPANY="\[\e[38;05;106m\]${ORG}"
     PS1_IEND='\[\e[38;05;52m\]]'
     PS1_BLOCK_HEADER="$PS1_ISTART$PS1_TIME $PS1_COMPANY$PS1_IEND"
     PS1_USER='\[\e[38;05;118m\]\u'
@@ -89,7 +90,7 @@ if [ "$color_prompt" = yes ]; then
     PS1_SEP='\[\e[38;05;226m\]➭ '
     PS1_END='\[\e[00m\]'
 else
-    PS1_BLOCK_HEADER='[\t gwax]'
+    PS1_BLOCK_HEADER="[\t ${ORG}]"
     PS1_BLOCK_USER='\u@\h:'
     PS1_PWD='\w'
     PS1_GIT="$(__git_ps1)"
