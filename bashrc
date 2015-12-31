@@ -85,7 +85,7 @@ if [ "$color_prompt" = yes ]; then
     PS1_C='\[\e[38;05;208m\]:'
     PS1_BLOCK_USER="$PS1_USER$PS1_AT$PS1_HOST$PS1_C"
     PS1_PWD='\[\e[38;05;51m\]\w'
-    PS1_GIT="\[\e[00m\]$(__git_ps1)"
+    PS1_GIT='\[\e[00m\]$(__git_ps1)'
     PS1_BLOCK_PWD="$PS1_PWD $PS1_GIT"
     PS1_SEP='\[\e[38;05;226m\]➭ '
     PS1_END='\[\e[00m\]'
@@ -93,7 +93,7 @@ else
     PS1_BLOCK_HEADER="[\t ${ORG}]"
     PS1_BLOCK_USER='\u@\h:'
     PS1_PWD='\w'
-    PS1_GIT="$(__git_ps1)"
+    PS1_GIT='$(__git_ps1)'
     PS1_BLOCK_PWD="$PS1_PWD $PS1_GIT"
     PS1_SEP='➭ '
     PS1_END=''
