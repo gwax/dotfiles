@@ -87,7 +87,7 @@ if [ "$color_prompt" = yes ]; then
 fi
 
 # Setup colored prompt
-ORG="gwax"
+ORG="CloverHealth"
 if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
     C0='\[\e[0m\]'
