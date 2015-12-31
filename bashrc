@@ -21,17 +21,25 @@ elif [[ -f /etc/profile.d/bash-completion ]]; then
     source /etc/profile.d/bash-completion
 fi
 
+if which pyenv > /dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
-# If boot2docker is installed and up, do shellinit
-if [[ -f /usr/local/bin/boot2docker ]] && [ "$(boot2docker status)" = running ]; then
-    eval "$(boot2docker shellinit 2> /dev/null)"
+# If docker-machine is installed and up, do shellinit
+if [[ -f /usr/local/bin/docker-machine ]] && [ "$(docker-machine status default)" = Running ]; then
+    eval "$(docker-machine env default 2> /dev/null)"
+fi
+
+# Enable pyenv shims
+if which pyenv > /dev/null 2>&1; then
+    eval "$(pyenv init -)"
 fi
 
 # Enable ruby shims and autocompletion
-export RBENV_ROOT="$HOME/.rbenv"
-if which rbenv > /dev/null 2>&1; then
-    eval "$(rbenv init -)"
-fi
+#export RBENV_ROOT="$HOME/.rbenv"
+#if which rbenv > /dev/null 2>&1; then
+#    eval "$(rbenv init -)"
+#fi
 
 # Change the window title of X terminals
 case ${TERM} in
@@ -76,15 +84,15 @@ if [ "$color_prompt" = yes ]; then
     PS1_C='\[\e[38;05;208m\]:'
     PS1_BLOCK_USER="$PS1_USER$PS1_AT$PS1_HOST$PS1_C"
     PS1_PWD='\[\e[38;05;51m\]\w'
-    PS1_GIT='\[\e[00m\]$(__git_ps1)'
+    PS1_GIT="\[\e[00m\]$(__git_ps1)"
     PS1_BLOCK_PWD="$PS1_PWD $PS1_GIT"
     PS1_SEP='\[\e[38;05;226m\]➭ '
     PS1_END='\[\e[00m\]'
 else
-    PS1_BLOCK_HEADER='[\t CloverHealth]'
+    PS1_BLOCK_HEADER='[\t gwax]'
     PS1_BLOCK_USER='\u@\h:'
     PS1_PWD='\w'
-    PS1_GIT='$(__git_ps1)'
+    PS1_GIT="$(__git_ps1)"
     PS1_BLOCK_PWD="$PS1_PWD $PS1_GIT"
     PS1_SEP='➭ '
     PS1_END=''
@@ -100,9 +108,15 @@ shopt -s histappend
 shopt -s cmdhist
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+# Increase ulimits
+ulimit -n 8192
+
 # Application color support (mostly ls)
 export CLICOLOR=1
 ls --color=auto &> /dev/null && alias ls='ls --color=auto'
+
+# Add local sbin to path
+export PATH="/usr/local/sbin:$PATH"
 
 # Add local binaries
 if [[ -d ~/bin ]] ; then
@@ -112,4 +126,9 @@ fi
 # Pull in aliases
 if [[ -f ~/.bash_aliases ]] ; then
     source ~/.bash_aliases
+fi
+
+# Pull in secrets
+if [[ -f ~/.bash_secrets ]] ; then
+    source ~/.bash_secrets
 fi
