@@ -1,0 +1,19 @@
+#!/bin/bash
+
+for repo in ~/git/*
+do
+    echo "${repo}"
+    if git -C "${repo}" config remote.origin.url > /dev/null
+    then
+        git -C "${repo}" fetch --prune --tags origin
+    else
+        echo No remote 'origin'
+    fi
+
+    if git -C "${repo}" config remote.upstream.url > /dev/null
+    then
+        git -C "${repo}" fetch --prune --tags upstream
+        git -C "${repo}" remote prune upstream
+    fi
+
+done
