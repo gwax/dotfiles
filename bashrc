@@ -21,25 +21,28 @@ elif [[ -f /etc/profile.d/bash-completion ]]; then
     source /etc/profile.d/bash-completion
 fi
 
-if which pyenv > /dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
 # If docker-machine is installed and up, do shellinit
 if [[ -f /usr/local/bin/docker-machine ]] && [ "$(docker-machine status default)" = Running ]; then
     eval "$(docker-machine env default 2> /dev/null)"
 fi
 
 # Enable pyenv shims
-if which pyenv > /dev/null 2>&1; then
-    eval "$(pyenv init -)"
+if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
+
+# Enable nvm
+if which brew > /dev/null 2>&1; then
+    if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
+        export NVM_DIR=~/.nvm
+        source "$(brew --prefix nvm)/nvm.sh"
+    fi
 fi
 
 # Enable ruby shims and autocompletion
-#export RBENV_ROOT="$HOME/.rbenv"
-#if which rbenv > /dev/null 2>&1; then
-#    eval "$(rbenv init -)"
-#fi
+export RBENV_ROOT="$HOME/.rbenv"
+if which rbenv > /dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
 
 # Change the window title of X terminals
 case ${TERM} in
@@ -98,16 +101,17 @@ else
     PS1_SEP='➭ '
     PS1_END=''
 fi
-PS1="\n$PS1_BLOCK_HEADER $PS1_BLOCK_USER\n$PS1_BLOCK_PWD\n$PS1_SEP$PS1_END"
+export PS1="\n$PS1_BLOCK_HEADER $PS1_BLOCK_USER\n$PS1_BLOCK_PWD\n$PS1_SEP$PS1_END"
 unset color_prompt
 
-# Forever history
-HISTIGNORE="&:ls:exit:history"
-HISTSIZE=
-HISTFILESIZE=
+# History management
+export HISTIGNORE="[ \t]*:&:cd:cd *:clear:ls:ls *:exit:history*"
+export HISTCONTROL="ignoredups:erasedups"
+export HISTSIZE="INFINITE"
+export HISTFILESIZE="INFINITE"
 shopt -s histappend
 shopt -s cmdhist
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # Increase ulimits
 ulimit -n 8192
@@ -120,6 +124,9 @@ ls --color=auto &> /dev/null && alias ls='ls --color=auto'
 export PATH="/usr/local/sbin:$PATH"
 
 # Add local binaries
+if [[ -d ~/opt/bin ]] ; then
+    export PATH=~/opt/bin:$PATH
+fi
 if [[ -d ~/bin ]] ; then
     export PATH=~/bin:$PATH
 fi
@@ -136,3 +143,11 @@ fi
 
 # Setup airflow environment
 export AIRFLOW_HOME=~/airflow
+
+if [[ -d ~/opt/google-cloud-sdk ]]; then
+    # The next line updates PATH for the Google Cloud SDK.
+    source "${HOME}/opt/google-cloud-sdk/path.bash.inc"
+
+    # The next line enables shell command completion for gcloud.
+    source "${HOME}/opt/google-cloud-sdk/completion.bash.inc"
+fi
