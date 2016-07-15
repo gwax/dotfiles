@@ -77,10 +77,10 @@ fi
 ORG="gwax"
 if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
-    PS1_ISTART='\[\e[38;05;52m\]['
-    PS1_TIME='\[\e[38;05;240m\]\t'
+    PS1_ISTART='\[\e[38;05;201m\]['
+    PS1_TIME='\[\e[38;05;99m\]\t'
     PS1_COMPANY="\[\e[38;05;106m\]${ORG}"
-    PS1_IEND='\[\e[38;05;52m\]]'
+    PS1_IEND='\[\e[38;05;201m\]]'
     PS1_BLOCK_HEADER="$PS1_ISTART$PS1_TIME $PS1_COMPANY$PS1_IEND"
     PS1_USER='\[\e[38;05;118m\]\u'
     PS1_AT='\[\e[38;05;117m\]@'
@@ -88,7 +88,7 @@ if [ "$color_prompt" = yes ]; then
     PS1_C='\[\e[38;05;208m\]:'
     PS1_BLOCK_USER="$PS1_USER$PS1_AT$PS1_HOST$PS1_C"
     PS1_PWD='\[\e[38;05;51m\]\w'
-    PS1_GIT='\[\e[00m\]$(__git_ps1)'
+    PS1_GIT='\[\e[38;05;228m\]$(__git_ps1)\[\e[00m\]'
     PS1_BLOCK_PWD="$PS1_PWD $PS1_GIT"
     PS1_SEP='\[\e[38;05;226m\]➭ '
     PS1_END='\[\e[00m\]'
