@@ -106,12 +106,12 @@ unset color_prompt
 
 # History management
 export HISTIGNORE="[ \t]*:&:cd:cd *:clear:ls:ls *:exit:history*"
-export HISTCONTROL="ignoredups:erasedups"
 export HISTSIZE="INFINITE"
 export HISTFILESIZE="INFINITE"
 shopt -s histappend
 shopt -s cmdhist
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+alias histsync='history | sort -k2 -k1nr | uniq -f1 | sort -n | tr -s " " | cut -d " " -f3- > ~/.tmp$$ && history -c && history -r ~/.tmp$$ && history -w && rm ~/.tmp$$'
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}histsync"
 
 # Increase ulimits
 ulimit -n 8192
