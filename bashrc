@@ -110,7 +110,7 @@ export HISTSIZE="INFINITE"
 export HISTFILESIZE="INFINITE"
 shopt -s histappend
 shopt -s cmdhist
-alias histsync='history | sort -k2 -k1nr | uniq -f1 | sort -n | tr -s " " | cut -d " " -f3- > ~/.tmp$$ && history -c && history -r ~/.tmp$$ && history -w && rm ~/.tmp$$'
+alias histsync='history -a && history -c && history -r && history | sort -k2 -k1nr | uniq -f1 | sort -n | tr -s " " | cut -d " " -f3- > ~/.tmp$$ && history -c && history -r ~/.tmp$$ && history -w && rm ~/.tmp$$'
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}histsync"
 
 # Increase ulimits
