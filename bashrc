@@ -21,11 +21,6 @@ elif [[ -f /etc/profile.d/bash-completion ]]; then
     source /etc/profile.d/bash-completion
 fi
 
-# If docker-machine is installed and up, do shellinit
-if [[ -f /usr/local/bin/docker-machine ]] && [ "$(docker-machine status default)" = Running ]; then
-    eval "$(docker-machine env default 2> /dev/null)"
-fi
-
 # Enable pyenv shims
 if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
@@ -105,7 +100,7 @@ export PS1="\n$PS1_BLOCK_HEADER $PS1_BLOCK_USER\n$PS1_BLOCK_PWD\n$PS1_SEP$PS1_EN
 unset color_prompt
 
 # History management
-export HISTIGNORE="[ \t]*:&:cd:cd *:clear:ls:ls *:exit:history*"
+export HISTIGNORE="[ \t]*:&:cd:clear:ls:exit:history*"
 export HISTSIZE="INFINITE"
 export HISTFILESIZE="INFINITE"
 shopt -s histappend
@@ -129,6 +124,9 @@ if [[ -d ~/opt/bin ]] ; then
 fi
 if [[ -d ~/bin ]] ; then
     export PATH=~/bin:$PATH
+fi
+if [[ -d ~/.cargo/bin ]] ; then
+    export PATH=~/.cargo/bin:$PATH
 fi
 
 # Pull in aliases
