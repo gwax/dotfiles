@@ -1,11 +1,7 @@
-if [ -f ~/.profile ]; then
-    source ~/.profile
+if [ -f "$HOME/.profile" ]; then
+    source "$HOME/.profile"
 fi
 
-case "$-" in
-*i*)
-    # interactive shell
-    if [ -f ~/.bashrc ]; then
-        source ~/.bashrc
-    fi
-esac
+if [ -f "$HOME/.bashrc" ]; then
+    source "$HOME/.bashrc"
+fi

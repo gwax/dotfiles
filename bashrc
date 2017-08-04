@@ -1,8 +1,46 @@
-# This file is sourced by all *interactive* bash shells on startup,
-# including some apparently interactive shells such as scp and rcp
-# that can't tolerate any output.  So make sure this doesn't display
-# anything or bad things will happen !
+#!/bin/bash
+# Extend path
+EXTRA_PATHS=(
+    "/usr/local/sbin"
+    "$HOME/opt/bin"
+    "$HOME/.cargo/bin"
+    "$HOME/.cabal/bin"
+    "$HOME/.local/bin"
+    "$HOME/bin"
+)
+for extra_path in "${EXTRA_PATHS[@]}"; do
+    export PATH="${extra_path}:${PATH}"
+done
 
+export RBENV_ROOT="$HOME/.rbenv"
+
+EXTRA_SOURCES=(
+    "/etc/profile.d/bash-completion"
+    "/usr/share/git/git-prompt.sh"
+    "$HOME/.cargo/rustup.bash-completion"
+    "$HOME/opt/google-cloud-sdk/path.bash.inc"
+    "$HOME/opt/google-cloud-sdk/completion.bash.inc"
+    "$HOME/.bash_aliases"
+    "$HOME/.bash_secrets"
+)
+if which brew > /dev/null 2>&1; then
+    EXTRA_SOURCES+=(
+        "$(brew --prefix)/etc/bash_completion"
+    )
+fi
+for extra_source in "${EXTRA_SOURCES[@]}"; do
+    if [[ -f "$extra_source" ]]; then
+        source "$extra_source"
+    fi
+done
+
+EXTRA_EVALS=()
+which pyenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv init -)")
+which pyenv-virtualenv-init > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv virtualenv-init -)")
+which rbenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(rbenv init -)")
+for extra_eval in "${EXTRA_EVALS[@]}"; do
+    eval "$extra_eval"
+done
 
 # Test for an interactive shell.  There is no need to set anything
 # past this point for scp and rcp, and it's important to refrain from
@@ -10,33 +48,6 @@
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
-fi
-
-# Enable bash completions
-if which brew > /dev/null 2>&1; then
-    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-        source $(brew --prefix)/etc/bash_completion
-    fi
-elif [[ -f /etc/profile.d/bash-completion ]]; then
-    source /etc/profile.d/bash-completion
-fi
-
-# Enable pyenv shims
-if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
-
-# Enable nvm
-if which brew > /dev/null 2>&1; then
-    if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
-        export NVM_DIR=~/.nvm
-        source "$(brew --prefix nvm)/nvm.sh"
-    fi
-fi
-
-# Enable ruby shims and autocompletion
-export RBENV_ROOT="$HOME/.rbenv"
-if which rbenv > /dev/null 2>&1; then
-    eval "$(rbenv init -)"
 fi
 
 # Change the window title of X terminals
@@ -56,10 +67,6 @@ else
     color_prompt=
 fi
 
-# git PS1 options
-if [[ -f /usr/share/git/git-prompt.sh ]]; then
-    source /usr/share/git/git-prompt.sh
-fi
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -101,12 +108,11 @@ unset color_prompt
 
 # History management
 export HISTIGNORE="[ \t]*:&:cd:clear:ls:exit:history*"
-export HISTSIZE="INFINITE"
-export HISTFILESIZE="INFINITE"
+export HISTCONTROL=ignoredups:erasedups
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 shopt -s histappend
-shopt -s cmdhist
-alias histsync='history -a && history -c && history -r && history | sort -k2 -k1nr | uniq -f1 | sort -n | tr -s " " | cut -d " " -f3- > ~/.tmp$$ && history -c && history -r ~/.tmp$$ && history -w && rm ~/.tmp$$'
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}histsync"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Increase ulimits
 ulimit -n 8192
@@ -115,37 +121,5 @@ ulimit -n 8192
 export CLICOLOR=1
 ls --color=auto &> /dev/null && alias ls='ls --color=auto'
 
-# Add local sbin to path
-export PATH="/usr/local/sbin:$PATH"
-
-# Add local binaries
-if [[ -d ~/opt/bin ]] ; then
-    export PATH=~/opt/bin:$PATH
-fi
-if [[ -d ~/bin ]] ; then
-    export PATH=~/bin:$PATH
-fi
-if [[ -d ~/.cargo/bin ]] ; then
-    export PATH=~/.cargo/bin:$PATH
-fi
-
-# Pull in aliases
-if [[ -f ~/.bash_aliases ]] ; then
-    source ~/.bash_aliases
-fi
-
-# Pull in secrets
-if [[ -f ~/.bash_secrets ]] ; then
-    source ~/.bash_secrets
-fi
-
 # Setup airflow environment
 export AIRFLOW_HOME=~/airflow
-
-if [[ -d ~/opt/google-cloud-sdk ]]; then
-    # The next line updates PATH for the Google Cloud SDK.
-    source "${HOME}/opt/google-cloud-sdk/path.bash.inc"
-
-    # The next line enables shell command completion for gcloud.
-    source "${HOME}/opt/google-cloud-sdk/completion.bash.inc"
-fi
