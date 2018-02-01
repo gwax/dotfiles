@@ -2,26 +2,31 @@
 # Extend path
 EXTRA_PATHS=(
     "/usr/local/sbin"
+    "/usr/local/opt/gettext/bin"
     "$HOME/opt/bin"
     "$HOME/.cargo/bin"
     "$HOME/.cabal/bin"
     "$HOME/.local/bin"
     "$HOME/bin"
+    "/Library/Frameworks/Mono.framework/Versions/Current/bin"
+    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )
 for extra_path in "${EXTRA_PATHS[@]}"; do
     export PATH="${extra_path}:${PATH}"
 done
 
+export NVM_DIR="$HOME/.nvm"
 export RBENV_ROOT="$HOME/.rbenv"
 
 EXTRA_SOURCES=(
-    "/etc/profile.d/bash-completion"
-    "/usr/share/git/git-prompt.sh"
-    "$HOME/.cargo/rustup.bash-completion"
-    "$HOME/opt/google-cloud-sdk/path.bash.inc"
-    "$HOME/opt/google-cloud-sdk/completion.bash.inc"
     "$HOME/.bash_aliases"
     "$HOME/.bash_secrets"
+    "$HOME/.cargo/rustup.bash-completion"
+    "$HOME/opt/google-cloud-sdk/completion.bash.inc"
+    "$HOME/opt/google-cloud-sdk/path.bash.inc"
+    "/etc/profile.d/bash-completion"
+    "/usr/local/opt/nvm/nvm.sh"
+    "/usr/share/git/git-prompt.sh"
 )
 if which brew > /dev/null 2>&1; then
     EXTRA_SOURCES+=(
@@ -107,12 +112,27 @@ export PS1="\n$PS1_BLOCK_HEADER $PS1_BLOCK_USER\n$PS1_BLOCK_PWD\n$PS1_SEP$PS1_EN
 unset color_prompt
 
 # History management
-export HISTIGNORE="[ \t]*:&:cd:clear:ls:exit:history*"
+export HISTIGNORE='@( )*:&:cd:clear:ls:exit:history*'
 export HISTCONTROL=ignoredups:erasedups
 export HISTSIZE=100000
 export HISTFILESIZE=100000
+shopt -s extglob
 shopt -s histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+function histfix() {
+    # Clean up existing history file
+    history \
+        | sort -k2 -k1,1nr \
+        | uniq -f1 \
+        | sort -n \
+        | awk '{$1=""; print}' \
+        | cut -d " " -f2- \
+        > ~/.tmp$$
+    history -c
+    history -r ~/.tmp$$
+    history -w
+    rm ~/.tmp$$
+}
 
 # Increase ulimits
 ulimit -n 8192
