@@ -1,0 +1,16 @@
+[user]
+    name = George Leslie-Waksman
+    email = waksman@gmail.com
+
+[push]
+    default = simple
+
+[diff]
+    tool = meld
+
+[pull]
+    rebase = true
+
+[merge]
+    conflictstyle = diff3
+
