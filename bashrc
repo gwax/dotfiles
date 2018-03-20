@@ -32,6 +32,7 @@ EXTRA_SOURCES=(
     "$NVM_DIR/bash_completion"
     "/usr/share/git/git-prompt.sh"
     "$HOME/.travis/travis.sh"
+    "$HOME/git/clover_pipeline/.clover_pipelinerc"
 )
 if which brew > /dev/null 2>&1; then
     EXTRA_SOURCES+=(
