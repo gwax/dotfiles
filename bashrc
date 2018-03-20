@@ -26,7 +26,8 @@ EXTRA_SOURCES=(
     "$HOME/opt/google-cloud-sdk/completion.bash.inc"
     "$HOME/opt/google-cloud-sdk/path.bash.inc"
     "/etc/profile.d/bash-completion"
-    "/usr/local/opt/nvm/nvm.sh"
+    "$NVM_DIR/nvm.sh"
+    "$NVM_DIR/bash_completion"
     "/usr/share/git/git-prompt.sh"
 )
 if which brew > /dev/null 2>&1; then
