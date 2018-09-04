@@ -7,6 +7,7 @@ EXTRA_PATHS=(
     "$HOME/.cargo/bin"
     "$HOME/.cabal/bin"
     "$HOME/.local/bin"
+    "$HOME/.jenv/bin"
     "$HOME/bin"
     "/Library/Frameworks/Mono.framework/Versions/Current/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -29,6 +30,7 @@ EXTRA_SOURCES=(
     "$NVM_DIR/nvm.sh"
     "$NVM_DIR/bash_completion"
     "/usr/share/git/git-prompt.sh"
+    "$HOME/.travis/travis.sh"
 )
 if which brew > /dev/null 2>&1; then
     EXTRA_SOURCES+=(
@@ -45,6 +47,7 @@ EXTRA_EVALS=()
 which pyenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv init -)")
 which pyenv-virtualenv-init > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv virtualenv-init -)")
 which rbenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(rbenv init -)")
+which jenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(jenv init -)")
 for extra_eval in "${EXTRA_EVALS[@]}"; do
     eval "$extra_eval"
 done
