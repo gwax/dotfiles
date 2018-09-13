@@ -116,7 +116,7 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 shopt -s extglob
 shopt -s histappend
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 function histfix() {
     # Clean up existing history file
     history \
@@ -141,3 +141,6 @@ ls --color=auto &> /dev/null && alias ls='ls --color=auto'
 
 # Setup airflow environment
 export AIRFLOW_HOME=~/airflow
+
+# Configure bat
+export BAT_THEME="Monokai Extended"
