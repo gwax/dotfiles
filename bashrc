@@ -11,6 +11,7 @@ EXTRA_PATHS=(
     "$HOME/bin"
     "/Library/Frameworks/Mono.framework/Versions/Current/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    "/Applications/Meld.app/Contents/MacOS/"
 )
 for extra_path in "${EXTRA_PATHS[@]}"; do
     export PATH="${extra_path}:${PATH}"

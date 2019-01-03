@@ -6,17 +6,17 @@
     default = simple
 
 [diff]
-    tool = meld
+    tool = Meld
 [difftool]
     prompt = false
-[difftool "meld"]
-    cmd = meld "$LOCAL" "$REMOTE"
+[difftool "Meld"]
+    cmd = Meld "$LOCAL" "$REMOTE"
 
 [merge]
-    tool = meld
+    tool = Meld
     conflictstyle = diff3
-[mergetool "meld"]
-    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output="$MERGED"
+[mergetool "Meld"]
+    cmd = Meld "$LOCAL" "$MERGED" "$REMOTE" --output="$MERGED"
 
 [pull]
     rebase = true
