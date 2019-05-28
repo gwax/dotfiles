@@ -10,13 +10,13 @@
 [difftool]
     prompt = false
 [difftool "Meld"]
-    cmd = Meld "$LOCAL" "$REMOTE"
+    cmd = meld "$LOCAL" "$REMOTE"
 
 [merge]
-    tool = Meld
+    tool = meld
     conflictstyle = diff3
-[mergetool "Meld"]
-    cmd = Meld "$LOCAL" "$MERGED" "$REMOTE" --output="$MERGED"
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output="$MERGED"
 
 [pull]
     rebase = true
