@@ -49,6 +49,7 @@ which pyenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv init -)")
 which pyenv-virtualenv-init > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv virtualenv-init -)")
 which rbenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(rbenv init -)")
 which jenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(jenv init -)")
+which direnv > /dev/null 2>&1 && EXTRA_EVALS+=("$(direnv hook bash)")
 for extra_eval in "${EXTRA_EVALS[@]}"; do
     eval "$extra_eval"
 done
@@ -60,16 +61,6 @@ if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
 fi
-
-# Change the window title of X terminals
-case ${TERM} in
-    xterm*|rxvt*|Eterm|aterm|kterm|gnome)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
-        ;;
-    screen)
-        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-        ;;
-esac
 
 # Check for colored prompt support
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
