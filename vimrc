@@ -162,3 +162,10 @@ nnoremap <C-L> :nohl<CR><C-L>
 " Color scheme
 colorscheme monokai
 "------------------------------------------------------------
+
+
+"------------------------------------------------------------
+" List (show whitespace)
+"set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+"set list
+"------------------------------------------------------------

@@ -149,6 +149,7 @@ tags
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/python.env
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

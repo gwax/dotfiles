@@ -6,10 +6,10 @@
     default = simple
 
 [diff]
-    tool = Meld
+    tool = meld
 [difftool]
     prompt = false
-[difftool "Meld"]
+[difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
 
 [merge]

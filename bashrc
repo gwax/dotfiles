@@ -20,6 +20,8 @@ export NVM_DIR="$HOME/.nvm"
 export RBENV_ROOT="$HOME/.rbenv"
 export RTV_BROWSER="w3m"
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 EXTRA_SOURCES=(
     "$HOME/.bash_aliases"
     "$HOME/.bash_secrets"
@@ -31,6 +33,7 @@ EXTRA_SOURCES=(
     "$NVM_DIR/bash_completion"
     "/usr/share/git/git-prompt.sh"
     "$HOME/.travis/travis.sh"
+    "$HOME/perl5/perlbrew/etc/bashrc"
 )
 if which brew > /dev/null 2>&1; then
     EXTRA_SOURCES+=(
@@ -94,6 +97,7 @@ if [ "$color_prompt" = yes ]; then
 else
     C0='';C1='';C2='';C3='';C4='';C5='';C6='';C7='';C8='';C9='';CA=''
 fi
+# TODO: add to prompt: ${PYENV_VIRTUAL_ENV##*/})
 PS1_GIT='$(__git_ps1)'
 export PS1="${C1}╭─${C2}[${C3}\t ${C4}${ORG}${C2}] ${C5}\u${C6}@${C7}\h
 ${C1}│ ${C8}\w ${C9}$PS1_GIT
@@ -107,7 +111,7 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 shopt -s extglob
 shopt -s histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 function histfix() {
     # Clean up existing history file
     history \
