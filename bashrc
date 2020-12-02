@@ -87,7 +87,7 @@ if [ "$color_prompt" = yes ]; then
 fi
 
 # Setup colored prompt
-ORG="gwax"
+ORG="LifeRaft"
 if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
     # for i in "" "1;"; do for j in "0" "3"; do for k in {0..7}; do echo -e "\e[$i$j${k}m\\\e[$i$j${k}m\e[m"; done; done; done | column -c 80 -s '  '; echo -e "\e[m"
