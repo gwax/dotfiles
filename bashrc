@@ -25,6 +25,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 EXTRA_SOURCES=(
     "$HOME/.bash_aliases"
     "$HOME/.bash_secrets"
+    "$HOME/.iterm2_shell_integration.bash"
     "$HOME/.cargo/rustup.bash-completion"
     "$HOME/opt/google-cloud-sdk/completion.bash.inc"
     "$HOME/opt/google-cloud-sdk/path.bash.inc"
@@ -83,6 +84,7 @@ fi
 ORG="gwax"
 if [ "$color_prompt" = yes ]; then
     # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
+    # for i in "" "1;"; do for j in "0" "3"; do for k in {0..7}; do echo -e "\e[$i$j${k}m\\\e[$i$j${k}m\e[m"; done; done; done | column -c 80 -s '  '; echo -e "\e[m"
     C0='\[\e[0m\]'
     C1='\[\e[38;2;215;175;255m\]'
     C2='\[\e[38;2;255;0;255m\]'

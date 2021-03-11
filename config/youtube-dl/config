@@ -2,9 +2,9 @@
 -f bestvideo[height<=?1080]+bestaudio/best
 
 # aria2 downloader configuration
---external-downloader aria2c
---external-downloader-args "-c -j 7 -x 7 -s 7 -k 1M"
+#--external-downloader aria2c
+#--external-downloader-args "-c -j 7 -x 7 -s 7 -k 1M"
 
 # output format
---output "[%(playlist_index)03d][%(id)s] %(title)s.%(ext)s"
+#--output "[%(playlist_index)03d][%(id)s] %(title)s.%(ext)s"
 
