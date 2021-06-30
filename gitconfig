@@ -7,6 +7,7 @@
 
 [diff]
     tool = meld
+	colorMoved = zebra
 [difftool]
     prompt = false
 [difftool "meld"]
@@ -21,7 +22,9 @@
     cmd = Meld "$LOCAL" "$MERGED" "$REMOTE" --output="$MERGED"
 
 [pull]
-    rebase = true
+	rebase = true
 
 [core]
     excludesfile = ~/.gitignore_global
+[fetch]
+	prune = true

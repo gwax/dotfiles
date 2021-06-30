@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Extend path
 EXTRA_PATHS=(
     "/usr/local/sbin"
@@ -8,6 +9,7 @@ EXTRA_PATHS=(
     "$HOME/.cabal/bin"
     "$HOME/.local/bin"
     "$HOME/.jenv/bin"
+    "$HOME/.pyenv/bin"
     "$HOME/bin"
     "/Library/Frameworks/Mono.framework/Versions/Current/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -19,6 +21,7 @@ done
 export NVM_DIR="$HOME/.nvm"
 export RBENV_ROOT="$HOME/.rbenv"
 export RTV_BROWSER="w3m"
+export PYENV_ROOT="$HOME/.pyenv"
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
@@ -35,6 +38,8 @@ EXTRA_SOURCES=(
     "/usr/share/git/git-prompt.sh"
     "$HOME/.travis/travis.sh"
     "$HOME/perl5/perlbrew/etc/bashrc"
+    "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+    "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 )
 if which brew > /dev/null 2>&1; then
     EXTRA_SOURCES+=(
@@ -48,7 +53,7 @@ for extra_source in "${EXTRA_SOURCES[@]}"; do
 done
 
 EXTRA_EVALS=()
-which pyenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv init -)")
+which pyenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv init --path)")
 which pyenv-virtualenv-init > /dev/null 2>&1 && EXTRA_EVALS+=("$(pyenv virtualenv-init -)")
 which rbenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(rbenv init -)")
 which jenv > /dev/null 2>&1 && EXTRA_EVALS+=("$(jenv init -)")
@@ -136,8 +141,4 @@ ulimit -n 8192
 export CLICOLOR=1
 ls --color=auto &> /dev/null && alias ls='ls --color=auto'
 
-# Setup airflow environment
-export AIRFLOW_HOME=~/airflow
-
-# Configure bat
-export BAT_THEME="Monokai Extended"
+complete -C /usr/local/bin/terraform terraform
