@@ -1,3 +1,3 @@
 #!/bin/sh
-git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d
+git branch --merged | egrep -v "(^\*|master|trunk)" | xargs git branch -d
 git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D

@@ -10,6 +10,7 @@ EXTRA_PATHS=(
     "$HOME/.local/bin"
     "$HOME/.jenv/bin"
     "$HOME/.pyenv/bin"
+    "$HOME/go/bin"
     "$HOME/bin"
     "/Library/Frameworks/Mono.framework/Versions/Current/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
