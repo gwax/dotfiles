@@ -78,7 +78,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew pyenv colored-man-pages docker docker-compose pip rust)
+plugins=(git brew pyenv colored-man-pages docker docker-compose pip npm nvm yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,3 +110,6 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Set ulimit
+ulimit -n 2048
