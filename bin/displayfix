@@ -1,0 +1,2 @@
+#!/bin/sh
+displayplacer "id:0C3EF183-7A60-3517-D84A-33981EE59540 res:1792x1120 hz:59 color_depth:4 enabled:true scaling:on origin:(0,0) degree:0" "id:2E935981-DFF7-367A-30F1-00713A09B5EE res:1920x1080 hz:60 color_depth:8 enabled:true scaling:off origin:(3712,0) degree:0" "id:D58A480C-4751-8973-B780-0618BE306337 res:1920x1080 hz:60 color_depth:8 enabled:true scaling:off origin:(1792,0) degree:0"
