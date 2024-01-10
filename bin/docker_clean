@@ -1,4 +1,0 @@
-#!/bin/sh
-docker ps -a -q | xargs docker rm
-docker images | grep '^<none>' | awk '{print $3}' | xargs docker rmi
-docker network prune --force

@@ -1,9 +1,0 @@
-#!/bin/bash
-if [[ -d ~/.bash_completion.d/ ]] && \
-   ! find ~/.bash_completion.d/. ! -name . -prune -exec false {} +
-then
-    for f in ~/.bash_completion.d/*
-    do
-        source "$f"
-    done
-fi
