@@ -1,0 +1,2 @@
+#!/bin/sh
+displayplacer "id:1 res:1728x1117 hz:120 color_depth:8 enabled:true scaling:on origin:(0,0) degree:0" "id:3 res:1920x1080 hz:75 color_depth:8 enabled:true scaling:off origin:(1728,0) degree:0" "id:2 res:1920x1080 hz:75 color_depth:8 enabled:true scaling:off origin:(3648,0) degree:0"

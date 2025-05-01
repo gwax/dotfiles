@@ -6,8 +6,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+export PATH=$HOME/go/bin:$PATH
 export PATH="/usr/local/opt/postgresql@15/bin:/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="/Applications/MiniZincIDE.app/Contents/Resources:$PATH"
 
 # nvm configuration
 export NVM_DIR="$HOME/.nvm"
@@ -95,7 +97,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew pyenv colored-man-pages docker docker-compose pip npm nvm yarn zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git brew pyenv colored-man-pages docker docker-compose pip npm nvm yarn zsh-syntax-highlighting zsh-autosuggestions golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -130,3 +132,15 @@ source $ZSH/oh-my-zsh.sh
 
 # Set ulimit
 ulimit -n 2048
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# pnpm
+export PNPM_HOME="/Users/waksman/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

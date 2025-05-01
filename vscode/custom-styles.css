@@ -1,0 +1,18 @@
+// Taken from: https://github.com/microsoft/vscode/issues/36512#issuecomment-2664633156
+// and: https://github.com/microsoft/vscode/issues/36512#issuecomment-2795074528
+
+.mtki.mtkb.mtku.mtks {
+  font-family: "Monaspace Xenon", monospace;
+  font-weight: 300; /* do whatever weight you want of course */
+  font-style: normal;
+  text-decoration: none;
+}
+
+/* Comment Classes */
+.mtk13 {
+  font-family: "Monaspace Radon", monospace;
+}
+
+.mtk3 {
+  font-family: "Monaspace Radon", monospace;
+}
