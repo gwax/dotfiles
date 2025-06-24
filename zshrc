@@ -39,8 +39,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k" # set by `omz`
+ZSH_THEME="" # Do not manage themes with oh-my-zsh, use starship instead
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -150,3 +149,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Starship prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+else
+  echo "Starship prompt not found. Please install it to use the starship prompt."
+fi
