@@ -10,6 +10,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH="/usr/local/opt/postgresql@15/bin:/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/Applications/MiniZincIDE.app/Contents/Resources:$PATH"
 export PATH=$HOME/bin:$PATH
 
