@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load secrets (if any)
+[ -s "$HOME/.zshrc-secrets" ] && source "$HOME/.zshrc-secrets"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
